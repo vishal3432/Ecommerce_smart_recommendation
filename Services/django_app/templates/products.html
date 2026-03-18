@@ -1,0 +1,70 @@
+<h1>🛒 Products</h1>
+
+<div style="display:flex; flex-wrap:wrap;">
+
+{% for product in products %}
+  <div style="border:1px solid #ccc; padding:15px; margin:10px; width:200px;">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+
+    <button onclick="sendAction({{ product.id }}, 'like')">👍</button>
+    <button onclick="sendAction({{ product.id }}, 'dislike')">👎</button>
+  </div>
+{% endfor %}
+
+</div>
+
+<hr>
+
+<h2>🔥 Recommended for You</h2>
+
+<div id="recommendations" style="display:flex; flex-wrap:wrap;">
+
+{% for product in recommended_products %}
+  <div style="border:1px solid green; padding:15px; margin:10px; width:200px;">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.description }}</p>
+  </div>
+{% empty %}
+  <p>No recommendations yet. Like some products 👍</p>
+{% endfor %}
+
+</div>
+
+<script>
+function sendAction(productId, action) {
+
+    fetch("/interactions/interact/", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": getCSRFToken()
+        },
+        body: JSON.stringify({
+            product_id: productId,
+            action: action
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        // 🔥 Auto refresh recommendations
+        location.reload();
+    })
+    .catch(err => console.log(err));
+}
+
+// CSRF Token
+function getCSRFToken() {
+    let cookieValue = null;
+    let cookies = document.cookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+
+        if (cookie.startsWith('csrftoken=')) {
+            cookieValue = cookie.substring('csrftoken='.length);
+        }
+    }
+    return cookieValue;
+}
+</script>
