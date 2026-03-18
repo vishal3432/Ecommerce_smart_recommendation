@@ -50,16 +50,26 @@ SMART Recommendation System architecture (i.e, what is going in this project)
 ## 🛠 Setup Instructions
 
 ## 1. For Django
+
 cd Services/django_app
+
 python -m venv venv
+
 venv\Scripts\activate
+
 pip install -r requirements.txt
+
 python manage.py runserver
 
+
 ## 2. For FastAPI
+
 cd Services/fastapi_service
+
 pip install -r requirements.txt
+
 uvicorn main:app --reload --port 8001
+
 
 ---
 
