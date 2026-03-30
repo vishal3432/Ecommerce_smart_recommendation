@@ -1,2 +1,5 @@
 django
 gunicorn
+djangorestframework
+djangorestframework-simplejwt
+requests
