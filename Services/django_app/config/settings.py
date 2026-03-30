@@ -1,20 +1,16 @@
-
+import os
 from pathlib import Path
+from datetime import timedelta
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-^urct=-^u)g39b8l-6o-f_v8u@3pw$rwws2$!^#0xohsbe@t0w')
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+DEBUG = os.getenv('DEBUG', 'True') == 'True'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^urct=-^u)g39b8l-6o-f_v8u@3pw$rwws2$!^#0xohsbe@t0w'
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
