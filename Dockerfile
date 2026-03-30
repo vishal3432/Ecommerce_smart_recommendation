@@ -2,17 +2,14 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy both services
 COPY Services/django_app ./django_app
 COPY Services/FastApi ./FastApi
 
-# Install dependencies correctly
 RUN pip install --no-cache-dir -r ./django_app/requirements.txt
 RUN pip install --no-cache-dir -r ./FastApi/requirements.txt
 
-# Copy start script and make executable
 COPY start.sh .
 RUN chmod +x start.sh
 
 EXPOSE 8000
-CMD ["./start.sh"]
+CMD ["/bin/bash", "start.sh"]
