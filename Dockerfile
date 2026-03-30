@@ -6,11 +6,11 @@ WORKDIR /app
 COPY Services/django_app ./django_app
 COPY Services/FastApi ./FastApi
 
-# Install deps
+# Install dependencies correctly
 RUN pip install --no-cache-dir -r ./django_app/requirements.txt
 RUN pip install --no-cache-dir -r ./FastApi/requirements.txt
 
-# Copy start script
+# Copy start script and make executable
 COPY start.sh .
 RUN chmod +x start.sh
 
