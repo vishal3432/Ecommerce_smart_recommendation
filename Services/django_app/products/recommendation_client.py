@@ -1,7 +1,7 @@
 import os
 import requests
 
-FASTAPI_URL = "http://localhost:8001/recommend"   # internal container communication
+FASTAPI_URL = os.getenv("FASTAPI_URL", "http://127.0.0.1:8001")  # internal container communication
 
 def get_recommendations(user, products):
     liked_products = user.interaction_set.filter(action='like')
