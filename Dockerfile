@@ -8,7 +8,7 @@ COPY Services/FastApi ./FastApi
 
 # Install deps
 RUN pip install --no-cache-dir -r ./django_app/requirements.txt
-RUN pip install --no-cache-dir -r ./fastApi/requirements.txt
+RUN pip install --no-cache-dir -r ./FastApi/requirements.txt
 
 # Copy start script
 COPY start.sh .
