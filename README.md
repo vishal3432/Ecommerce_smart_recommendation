@@ -3,6 +3,7 @@
 ##  Problem statement
 
 The task is to create an e-commerce web application using Django. This application will feature a product recommendation system powered by a machine learning model and  optimize certain calculations or model inference using Cython to improve performance.
+
 ---
 
 ## Architecture
