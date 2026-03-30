@@ -1,9 +1,11 @@
 #!/bin/bash
+set -e
 
-# Start FastAPI recommendation service in background
+# Start FastAPI in background
 cd /app/FastApi
 uvicorn main:app --host 0.0.0.0 --port 8001 &
 
-# Start Django using Railway's dynamic PORT
+# Start Django with explicit PORT handling
 cd /app/django_app
-gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
+echo "Starting Django on port $PORT"
+exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --log-level info
