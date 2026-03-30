@@ -4,12 +4,14 @@ from datetime import timedelta
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-^urct=-^u)g39b8l-6o-f_v8u@3pw$rwws2$!^#0xohsbe@t0w')
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-change-this')
 
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
+#  for production safety
+CSRF_TRUSTED_ORIGINS = ['https://*.up.railway.app', 'https://*.railway.app']
 
 
 
