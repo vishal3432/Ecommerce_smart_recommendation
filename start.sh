@@ -1,11 +1,10 @@
 #!/bin/bash
 set -e
 
-# Start FastAPI in background
+echo "Starting FastAPI on port 8001..."
 cd /app/FastApi
 uvicorn main:app --host 0.0.0.0 --port 8001 &
 
-# Start Django with explicit PORT handling
+echo "Starting Django on Railway port $PORT..."
 cd /app/django_app
-echo "Starting Django on port $PORT"
-exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --log-level info
+exec gunicorn config.wsgi:application --bind "0.0.0.0:${PORT}" --log-level info
