@@ -2,9 +2,9 @@
 
 echo "Creating superuser..."
 
-export DJANGO_SUPERUSER_USERNAME=admin
-export DJANGO_SUPERUSER_EMAIL=admin@gmail.com
-export DJANGO_SUPERUSER_PASSWORD=admin123
+export DJANGO_SUPERUSER_USERNAME=Vishal
+export DJANGO_SUPERUSER_EMAIL=vishal@gmail.com
+export DJANGO_SUPERUSER_PASSWORD=Vishal@123
 
 cd django_app
 python manage.py createsuperuser --noinput || echo "Superuser already exists"
