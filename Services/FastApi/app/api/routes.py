@@ -4,7 +4,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 router = APIRouter()
 
-# ✅ GET version (for Django query-based call)
+# GET version (for Django query-based call)
 @router.get("/recommend")
 def recommend_get(query: str):
     # Dummy fallback logic (since no products passed)
@@ -18,7 +18,7 @@ def recommend_get(query: str):
         return {"ids": [1, 3, 5]}
 
 
-# ✅ POST version (your original ML logic)
+# POST version (your original ML logic)
 @router.post("/recommend")
 async def recommend_post(request: Request):
     data = await request.json()
