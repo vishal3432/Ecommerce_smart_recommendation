@@ -1,25 +1,28 @@
 #!/bin/bash
 
-echo "Starting Ecommerce System"
+echo "🚀 Starting Ecommerce System..."
 
-# FastAPI 
-echo "Starting FastAPI..."
+PORT=${PORT:-8000}
 
-cd Services/FastApi
+# ================= FastAPI =================
+echo "⚡ Starting FastAPI..."
+
+cd FastApi
+
 uvicorn main:app --host 0.0.0.0 --port 8001 &
 
-cd ../..
+cd ..
 
 sleep 5
 
-# Django
-echo "Starting Django..."
+# ================= Django =================
+echo "🌐 Starting Django..."
 
-cd Services/django_app
+cd django_app
 
 python manage.py migrate --noinput || echo "Migration skipped"
 python manage.py collectstatic --noinput --clear || echo "Collectstatic skipped"
 
-echo "Running Django with Gunicorn..."
+echo "✅ Running Django with Gunicorn on port $PORT..."
 
 exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
