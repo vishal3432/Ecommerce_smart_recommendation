@@ -1,5 +1,15 @@
 #!/bin/bash
 
+echo "Creating superuser..."
+
+export DJANGO_SUPERUSER_USERNAME=admin
+export DJANGO_SUPERUSER_EMAIL=admin@gmail.com
+export DJANGO_SUPERUSER_PASSWORD=admin123
+
+cd django_app
+python manage.py createsuperuser --noinput || echo "Superuser already exists"
+cd ..
+
 echo "🚀 Starting Ecommerce System..."
 
 PORT=${PORT:-8000}
