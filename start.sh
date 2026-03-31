@@ -1,23 +1,25 @@
 #!/bin/bash
 
-echo "Starting Ecommerce Smart Recommendation System on Render..."
+echo "Starting Ecommerce System"
 
-# ====================== FastAPI Service ======================
-echo "Starting FastAPI ML service on http://127.0.0.1:8001 ..."
+# FastAPI 
+echo "Starting FastAPI..."
+
 cd Services/FastApi
+uvicorn main:app --host 0.0.0.0 --port 8001 &
 
-pip install --no-cache-dir -r requirements.txt || true
+cd ../..
 
-uvicorn main:app --host 127.0.0.1 --port 8001 &
+sleep 5
 
-sleep 10
+# Django
+echo "Starting Django..."
 
-# ====================== Django Main App ======================
-echo "Starting Django on port $PORT ..."
 cd Services/django_app
 
 python manage.py migrate --noinput || echo "Migration skipped"
 python manage.py collectstatic --noinput --clear || echo "Collectstatic skipped"
 
-echo "✅ Starting Django server on port $PORT..."
-exec python manage.py runserver 0.0.0.0:$PORT
+echo "Running Django with Gunicorn..."
+
+exec gunicorn config.wsgi:application --bind 0.0.0.0:$PORT
