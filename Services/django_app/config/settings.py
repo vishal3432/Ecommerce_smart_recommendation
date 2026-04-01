@@ -13,7 +13,8 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 #  for production safety
 CSRF_TRUSTED_ORIGINS = ['https://*.up.railway.app', 'https://*.railway.app']
 
-
+# added fastapi
+FASTAPI_URL = os.getenv("FASTAPI_URL", "http://127.0.0.1:8001/recommend")
 
 # Application definition
 
@@ -107,7 +108,32 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "LOCATION": "unique-snowflake",
+    }
+}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": "INFO",
+    },
+}
 from datetime import timedelta
 
 REST_FRAMEWORK = {
