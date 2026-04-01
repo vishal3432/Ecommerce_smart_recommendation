@@ -62,7 +62,7 @@
                 <h3>{{ item.product.name }}</h3>
                 <p>Price: ₹{{ item.product.price }}</p>
                 <p>Quantity: {{ item.quantity }}</p>
-                <p><strong>Total: ₹{{ item.product.price|floatformat:2|add:item.quantity|floatformat:2 }}</strong></p>
+                <p><strong>Total: ₹{{ item.product.price }} × {{ item.quantity }}</strong></p>
             </div>
         {% endfor %}
 
