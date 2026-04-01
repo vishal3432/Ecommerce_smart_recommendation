@@ -16,7 +16,7 @@ def product_page(request):
     query = request.GET.get("query", "")
 
     if query:
-        data = get_recommendations(query, products)
+        data = get_recommendations(request.user if request.user.is_authenticated else query, products)
 
         if "recommended_products" in data:
             recommended_products = Product.objects.filter(
