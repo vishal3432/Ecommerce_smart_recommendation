@@ -1,11 +1,7 @@
 from fastapi import APIRouter, Request
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
+from ml.recommender import compute_recommendations
 
 router = APIRouter()
-
-# ✅ Global vectorizer (performance boost)
-vectorizer = TfidfVectorizer()
 
 
 # =========================
@@ -24,7 +20,6 @@ def recommend_get(query: str):
     else:
         ids = [1, 3, 5]
 
-    # ✅ FIXED RESPONSE FORMAT
     return {"recommended_products": ids}
 
 
@@ -42,38 +37,8 @@ async def recommend_post(request: Request):
         if not products:
             return {"recommended_products": []}
 
-        # ✅ Prepare text
-        product_texts = [p.get("description", "") for p in products]
-        all_texts = product_texts + user_prefs
-
-        # ✅ Fit-transform
-        matrix = vectorizer.fit_transform(all_texts)
-
-        product_vectors = matrix[:len(products)]
-
-        # =========================
-        # 🧠 Similarity Logic
-        # =========================
-        if user_prefs:
-            user_vector = matrix[len(products):].mean(axis=0)
-            similarity = cosine_similarity(user_vector, product_vectors)[0]
-        else:
-            # fallback: average similarity
-            similarity = cosine_similarity(product_vectors, product_vectors).mean(axis=0)
-
-        # =========================
-        # 📊 Ranking
-        # =========================
-        ranked = sorted(
-            enumerate(similarity),
-            key=lambda x: x[1],
-            reverse=True
-        )
-
-        top_ids = [
-            products[idx]["id"]
-            for idx, _ in ranked[:5]
-        ]
+        # ✅ Use ML module (clean architecture)
+        top_ids = compute_recommendations(products, user_prefs)
 
         return {"recommended_products": top_ids}
 
