@@ -1,0 +1,7 @@
+django
+gunicorn
+djangorestframework
+djangorestframework-simplejwt
+requests
+python-dotenv
+whitenoise
