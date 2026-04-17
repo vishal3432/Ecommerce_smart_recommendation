@@ -8,17 +8,18 @@ PORT=${PORT:-8000}
 FASTAPI_PORT=8001
 
 # ================= FastAPI =================
+# ================= FastAPI =================
 echo "⚡ Starting FastAPI..."
 
 cd FastApi
 
-# Run FastAPI in background with logs
-uvicorn main:app --host 0.0.0.0 --port $FASTAPI_PORT &
+# Kill anything already on port 8001 before starting
+fuser -k 8001/tcp 2>/dev/null || true
 
+uvicorn main:app --host 0.0.0.0 --port $FASTAPI_PORT &
 FASTAPI_PID=$!
 
 cd ..
-
 sleep 3
 
 # ================= Django =================
