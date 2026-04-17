@@ -5,3 +5,5 @@ djangorestframework-simplejwt
 requests
 python-dotenv
 whitenoise
+psycopg2-binary
+dj-database-url
