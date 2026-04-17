@@ -15,18 +15,14 @@ def product_page(request):
     query = request.GET.get("query", "")
 
     if request.user.is_authenticated:
-        # Always try to recommend based on likes
         data = get_recommendations(request.user, products)
-        if "recommended_products" in data:
-            recommended_products = Product.objects.filter(
-                id__in=data["recommended_products"]
-            )
-    elif query:
-        data = get_recommendations(query, products)
-        if "recommended_products" in data:
-            recommended_products = Product.objects.filter(
-                id__in=data["recommended_products"]
-            )
+    else:
+        data = get_recommendations(query or "", products)
+
+    if "recommended_products" in data:
+        recommended_products = Product.objects.filter(
+            id__in=data["recommended_products"]
+        )
 
     return render(request, "products.html", {
         "products": products,
