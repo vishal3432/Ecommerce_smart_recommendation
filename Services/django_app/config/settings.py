@@ -11,7 +11,11 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
 #  for production safety
-CSRF_TRUSTED_ORIGINS = ['https://*.up.railway.app', 'https://*.railway.app']
+CSRF_TRUSTED_ORIGINS =[
+    'https://*.up.railway.app',
+    'https://*.railway.app',
+    'https://*.onrender.com',
+]
 
 # added fastapi
 FASTAPI_URL = os.getenv("FASTAPI_URL", "http://127.0.0.1:8001/recommend")
