@@ -39,8 +39,8 @@ def get_recommendations(user_or_query, products):
 
         return response.json()
 
-    except Exception as e:
+     except Exception as e:
+        # ✅ FALLBACK: FastAPI down → return first 5 products instead of empty
         return {
-            "error": str(e),
-            "recommended_products": []
+            "recommended_products": [p.id for p in list(products[:5])]
         }
