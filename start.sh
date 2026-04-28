@@ -1,15 +1,14 @@
 #!/bin/bash
 
-set -e  # ❗ Stop on error
+set -e  # Stop on error
 
-echo "🚀 Starting Ecommerce System..."
+echo " Starting Ecommerce System..."
 
 PORT=${PORT:-8000}
 FASTAPI_PORT=8001
 
 # ================= FastAPI =================
-# ================= FastAPI =================
-echo "⚡ Starting FastAPI..."
+echo "Starting FastAPI..."
 
 cd FastApi
 
@@ -23,20 +22,20 @@ cd ..
 sleep 3
 
 # ================= Django =================
-echo "🛠 Starting Django..."
+echo " Starting Django..."
 
 cd django_app
 
 # Migrate FIRST
-echo "📦 Running migrations..."
+echo " Running migrations..."
 python manage.py migrate --noinput || echo "Migration skipped"
 
 # Collect static
-echo "📁 Collecting static files..."
+echo " Collecting static files..."
 python manage.py collectstatic --noinput --clear || echo "Collectstatic skipped"
 
 # Create/Update Superuser
-echo "👤 Creating or updating superuser..."
+echo " Creating or updating superuser..."
 
 python manage.py shell <<EOF
 from django.contrib.auth import get_user_model
@@ -58,7 +57,7 @@ else:
     print("Superuser updated")
 EOF
 
-echo "🌐 Running Django with Gunicorn on port $PORT..."
+echo " Running Django with Gunicorn on port $PORT..."
 
 # Run Django in foreground (main process)
 gunicorn config.wsgi:application --bind 0.0.0.0:$PORT &
@@ -73,6 +72,6 @@ echo "FastAPI PID: $FASTAPI_PID"
 # Wait for any process to exit
 wait -n
 
-echo "❌ One of the services stopped. Shutting down..."
+echo " One of the services stopped. Shutting down..."
 
 kill -TERM $DJANGO_PID $FASTAPI_PID 2>/dev/null
