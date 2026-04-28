@@ -50,7 +50,7 @@ The project follows a **microservices** approach:
 ## Tech Stack
 
 - **Backend**: Python, Django, FastAPI
-- **Machine Learning**: scikit-learn (TF-IDF & Cosine Similarity), spaCy NER
+- **Machine Learning**: scikit-learn (TF-IDF & Cosine Similarity)
 - **Database**: SQLite #In future, can be upgraded to PostgreSQL for production
 - **Frontend**: HTML, CSS, JavaScript #Used AI models to create this 
 - **Deployment**: Docker, Render
