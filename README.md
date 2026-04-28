@@ -39,7 +39,7 @@ The project follows a **microservices** approach:
 
 - Modern and interactive product listing UI
 - Real-time like/dislike tracking
-- Personalized recommendations using **TF-IDF + Cosine Similarity + spaCy NER**
+- Personalized recommendations using **TF-IDF + Cosine Similarity**
 - RESTful API communication between services
 - JWT-based authentication
 - Responsive frontend with HTML, CSS & JavaScript
