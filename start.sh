@@ -65,7 +65,7 @@ gunicorn config.wsgi:application --bind 0.0.0.0:$PORT &
 DJANGO_PID=$!
 
 # ================= Monitor =================
-echo "📡 Services running..."
+echo " Services running..."
 echo "Django PID: $DJANGO_PID"
 echo "FastAPI PID: $FASTAPI_PID"
 
